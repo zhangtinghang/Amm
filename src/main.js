@@ -1,0 +1,32 @@
+// The Vue build version to load with the `import` command
+// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
+import Vue from 'vue'
+import App from './App'
+import router from './router'
+import './permission' // permission control
+
+import store from './store'
+
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+
+import VueLazyload from 'vue-lazyload'
+
+Vue.use(ElementUI, {
+  size: 'medium' // set element-ui default size
+})
+
+Vue.use(VueLazyload, {
+  error:'./assets/loading.jpg',
+  loading:'./assets/loading.jpg'
+})
+// Vue.prototype.$http = axios
+Vue.config.productionTip = false
+
+/* eslint-disable no-new */
+new Vue({
+  el: '#app',
+  router,
+  store,
+  render: h => h(App)
+})
