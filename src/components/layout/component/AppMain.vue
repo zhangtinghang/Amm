@@ -23,7 +23,7 @@ export default {
 <style scoped>
 .app-main {
   /* 84 = navbar + tags-view = 50 +34 */
-  min-height: calc(100vh - 100px);
+  min-height: calc(100vh - 21.5rem);
   position: relative;
   overflow: hidden;
 }

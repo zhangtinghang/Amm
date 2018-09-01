@@ -20,7 +20,7 @@
 				</footer>
 			</article>
 
-			<v-pagination :total="total" :current-page='current' @pagechange="pagechange"></v-pagination>
+			<v-pagination class="list_page" :total="total" :current-page='current' @pagechange="pagechange"></v-pagination>
 		</section>
 </div>
 
@@ -118,5 +118,10 @@ export default {
 <style scoped>
 .pagination{
   width: 100% !important;
+}
+</style>
+<style>
+.list_page > ul{
+  margin:0;
 }
 </style>

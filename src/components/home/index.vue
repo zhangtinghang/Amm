@@ -54,17 +54,17 @@
 			<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi commodo, ipsum sed pharetra gravida, orci magna rhoncus neque, id pulvinar odio lorem non turpis. Nullam sit amet enim.</p>
 		</article>
 		<article class="grid col-one-third mq3-col-full">
-			<aside>03</aside>
+			<aside>04</aside>
 			<h5>games development / 游戏开发</h5>
 			<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi commodo, ipsum sed pharetra gravida, orci magna rhoncus neque, id pulvinar odio lorem non turpis. Nullam sit amet enim.</p>
 		</article>
 		<article class="grid col-one-third mq3-col-full">
-			<aside>03</aside>
+			<aside>05</aside>
 			<h5>UI design / UI设计</h5>
 			<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi commodo, ipsum sed pharetra gravida, orci magna rhoncus neque, id pulvinar odio lorem non turpis. Nullam sit amet enim.</p>
 		</article>
 		<article class="grid col-one-third mq3-col-full">
-			<aside>03</aside>
+			<aside>06</aside>
 			<h5>open / 开拓</h5>
 			<p>未完待续。。。期待你的加入，期待你的开拓！</p>
 		</article>
@@ -87,18 +87,18 @@
 					<p>Lorem ipsum dolor set amet</p>
 				</figcaption>
 			</figure> -->
-      <!-- <articleList></articleList> -->
+      <articleList></articleList>
 	</section>
 	</div> <!--main-->
 </template>
 <script>
 import slide from "../slide/index";
-// import articleList from "../article/index";
+import articleList from "@/components/article/index";
 export default {
   name: "home",
   components: {
     slide,
-    // articleList
+    articleList
   }
 };
 </script>

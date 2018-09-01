@@ -5,7 +5,7 @@
     <div class="figure-box">
       <figure v-for="item in portList" :key="item._id" class="grid col-one-quarter mq2-col-one-half">
         <router-link :to="{name:'PortfolioDetail',params:{obj:item}}">
-          <img v-lazy="img_port+item.cover" alt="图片不见了，很尴尬，哈哈">
+              <img v-lazy="img_port+item.cover" alt="图片不见了，很尴尬，哈哈">
           <span class="zoom"></span>
         </router-link>
         <figcaption>
@@ -15,7 +15,7 @@
         </figcaption>
       </figure>
     </div>
-    <v-pagination :total="total" :current-page='current' @pagechange="pagechange"></v-pagination>
+    <v-pagination class="portfolio_page" :total="total" :current-page='current' @pagechange="pagechange"></v-pagination>
   </div>
 </template>
 
@@ -90,6 +90,26 @@
   clear: both;
   display: block;
   visibility: hidden;
+}
+.figure-box{
+  margin-bottom: 20px;
+}
+figure > a {
+    display: block;
+    height: 100%;
+    height: 150px;
+    overflow: hidden;
+    position: relative;
+    border-top: 1px solid #DDD;
+    padding-top: 1em;
+}
+
+
+</style>
+<style>
+.portfolio_page > ul{
+  float: right;
+  margin: 0;
 }
 </style>
 

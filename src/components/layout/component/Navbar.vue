@@ -36,25 +36,28 @@
             <ul>
                 <li>
                     <router-link to="/login">
-                        Login / 登录
+                        {{isLogin ? '欢迎您：'+username :'Login/登录'}}
                     </router-link>
                 </li>
             </ul>
         </nav>
     </header>
 </template>
+
 <script>
-export default {
-  name: 'Navbar',
-//   computed: {
-//     cachedViews() {
-//       return this.$store.state.tagsView.cachedViews
-//     },
-//     key() {
-//       return this.$route.fullPath
-//     }
-//   }
-}
+    import {
+        getToken
+    } from '@/utils/auth' // 验权
+    import store from '@/store'
+    export default {
+        name: 'Navbar',
+        data: function() {
+            return {
+                isLogin: getToken() ? true : false,
+                username: store.getters.name
+            }
+        }
+    }
 </script>
 
 <style scoped>

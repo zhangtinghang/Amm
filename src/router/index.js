@@ -7,7 +7,6 @@ Vue.use(Router)
 import Layout from '@/components/layout/layout'
 export default new Router({
   routes: [
-    { path: '/login', component: () => import('@/components/login/index'), hidden: true },
     // { path: '/404', component: _import('errorPage/404'), hidden: true },
     // { path: '/401', component: _import('errorPage/401'), hidden: true },
     {
@@ -97,6 +96,19 @@ export default new Router({
           path: '/download',
           name: 'Download',
           component: () => import('@/components/download/index')
+        }
+      ]
+    },
+    {
+      path: '/login',
+      component: Layout,
+      name:'login',
+      redirect: '/login',
+      children: [
+        {
+          path: '/login',
+          name: 'Login',
+          component: () => import('@/components/login/index')
         }
       ]
     }

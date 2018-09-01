@@ -25,7 +25,7 @@ html,
         -moz-osx-font-smoothing: grayscale;
         color: #2c3e50;
     }
-    .grid{
-      /* padding-left: 0; */
+    .main > section{
+      margin-bottom: 0;
     }
 </style>
