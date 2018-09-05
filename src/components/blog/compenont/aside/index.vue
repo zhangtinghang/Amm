@@ -28,11 +28,13 @@
 			<div class="widget">
 			<h2>Categories</h2>
 			<ul>
-			 	<li><a href="#">Android / 安卓 (99+)</a></li>
-				<li><a href="#">Web / 前端 (53)</a></li>
-				<li><a href="#">Python / Python (12)</a></li>
-				<li><a href="#">Games / 游戏 (12)</a></li>
-				<li><a href="#">UI / 美工 (4)</a></li>
+				<li @click="toggleBtn(null)"><a href="javascript:;">All / 全部</a></li>
+			 	<li @click="toggleBtn(0)"><a href="javascript:;">Android / 安卓</a></li>
+				<li @click="toggleBtn(1)"><a href="javascript:;">Web / 前端</a></li>
+				<li @click="toggleBtn(2)"><a href="javascript:;">Python / Python</a></li>
+				<li @click="toggleBtn(3)"><a href="javascript:;">Games / 游戏</a></li>
+				<li @click="toggleBtn(4)"><a href="javascript:;">UI / 美工</a></li>
+				<li @click="toggleBtn(5)"><a href="javascript:;">Other / 其他</a></li>
 			</ul>
 			</div>
 
@@ -46,8 +48,17 @@
 		</aside>
 </template>
 <script>
+import store from '@/store'
+import blogBus from '@/utils/eventBus'
 export default {
-	
+	data:function(){
+		return {}
+	},
+	methods:{
+		toggleBtn:function(val){
+			blogBus.$emit("blogType",val);
+		}
+	}
 }
 </script>
 

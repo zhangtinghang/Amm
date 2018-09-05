@@ -1,4 +1,5 @@
 <template>
+<transition name="el-fade-in-linear">
   <div>
     <aside class="grid col-one-quarter mq2-col-one-third mq3-col-full">
       <h6>文章标题</h6>
@@ -40,11 +41,11 @@
     				<p>Lorem ipsum dolor set amet</p>
     			</figcaption>
     		</figure> -->
-  
-      <figure class="" v-html="articleData.content"></figure>
-  
+      
+        <figure class="" v-html="articleData.content"></figure>
     </section>
   </div>
+  </transition>
   <!--main-->
 </template>
 

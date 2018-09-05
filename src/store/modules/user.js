@@ -51,7 +51,7 @@ const user = {
     loginByUsername({ commit }, userInfo) {
       const username = userInfo.username.trim()
       return new Promise((resolve, reject) => {
-        loginByUsername(username, userInfo.password).then(response => {
+        loginByUsername(username, userInfo.password, userInfo.isTourist).then(response => {
           const token = response.data
           commit('SET_TOKEN', token)
           setToken(token)
@@ -65,9 +65,8 @@ const user = {
     // 获取用户信息
     GetUserInfo({ commit, state }) {
       return new Promise((resolve, reject) => {
-        console.log(state)
+        // let token = state.token || 
         getUserInfo(state.token).then(response => {
-          console.log('我要看下发的路由表', response)
           if (!response.data) { // 由于mockjs 不支持自定义状态码只能这样hack
             reject('error')
           }
@@ -89,6 +88,7 @@ const user = {
 
     // 登出
     LogOut({ commit, state }) {
+      console.log('这是执行了登出操作？')
       return new Promise((resolve, reject) => {
         logout(state.token).then(() => {
           commit('SET_TOKEN', '')

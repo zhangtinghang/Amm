@@ -3,6 +3,7 @@
   <div>
     <Aside />
     <div class="figure-box">
+      <transition name="el-fade-in-linear">
       <figure v-for="item in portList" :key="item._id" class="grid col-one-quarter mq2-col-one-half">
         <router-link :to="{name:'PortfolioDetail',params:{obj:item}}">
               <img v-lazy="img_port+item.cover" alt="图片不见了，很尴尬，哈哈">
@@ -14,6 +15,7 @@
           <p v-text="item.intro"></p>
         </figcaption>
       </figure>
+      </transition>
     </div>
     <v-pagination class="portfolio_page" :total="total" :current-page='current' @pagechange="pagechange"></v-pagination>
   </div>
@@ -26,6 +28,7 @@
   import store from '@/store'
   import Aside from '../component/menu'
   import pagination from '@/component/pagination'
+  import portBus from '@/utils/eventBus'
   export default {
     name: "portfoliolist",
     components: {
@@ -46,19 +49,24 @@
       }
     },
     created() {
-      this.fetchData()
+      let that = this;
+      that.fetchData(),
+      portBus.$on('portType',function(message){
+        that.fetchData(null, message)
+    })
     },
     methods: {
-      fetchData(_id) {
+      fetchData(_id, categoryType) {
         let that = this;
         let limit = that.limit;
         let token = store.getters.token;
         let id = _id || null;
+        let category = categoryType || null;
         let preNum = that.preNum;
         let nextNum = that.nextNum;
         nextNum = parseInt(that.nextNum);
         preNum = parseInt(that.preNum);
-        getList(id, preNum, nextNum, limit, token).then(response => {
+        getList(id, preNum, nextNum, limit, token, category).then(response => {
           that.portList = response.data;
           that.total = response.count;
           if (_id) {

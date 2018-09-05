@@ -47,7 +47,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
   plugins: [
     new webpack.DefinePlugin({
       'process.env': require('../config/dev.env'),
-      ajax_port:'"http://localhost:3000/native"',
+      ajax_port:'"http://localhost:3000/web"',
       img_port:'"http://localhost:3000"'
     }),
     new webpack.HotModuleReplacementPlugin(),

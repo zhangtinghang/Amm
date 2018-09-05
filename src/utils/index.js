@@ -56,4 +56,31 @@ export function parseTime(time, cFormat) {
       return d.getMonth() + 1 + '月' + d.getDate() + '日' + d.getHours() + '时' + d.getMinutes() + '分'
     }
   }
+
+  export function seleSwitch(value) {
+    switch (value) {
+      case 0:
+      value = 'android / 安卓'
+      break;
+    case 1:
+      value = 'web / 前端开发'
+      break;
+    case 2:
+      value = 'python /python开发'
+      break;
+    case 3:
+      value = 'games / 游戏'
+      break;
+    case 4:
+      value = 'UI / UI设计'
+      break;
+    case 5:
+      value = 'Other / 其他'
+      break;
+    default:
+      value = 'Unknown / 未知'
+      break;
+    }
+    return value;
+  }
   

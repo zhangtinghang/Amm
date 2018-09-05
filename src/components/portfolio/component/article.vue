@@ -1,4 +1,4 @@
-<template>
+5<template>
   	<figure class="grid col-one-quarter mq2-col-one-half">
 				<a href="javascript:;" @click="comeDetail(id)" :id="id">
 				<img :src="img_port+cover" alt="图片不见了，很尴尬，哈哈">

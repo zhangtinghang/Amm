@@ -28,4 +28,7 @@ html,
     .main > section{
       margin-bottom: 0;
     }
+    .fade-leave-active {
+      transition: none;
+    }
 </style>

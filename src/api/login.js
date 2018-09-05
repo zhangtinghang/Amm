@@ -1,12 +1,14 @@
 import request from '@/utils/request'
 
-export function loginByUsername(number, password) {
+export function loginByUsername(number, password, isTourist) {
+  let tourist = isTourist || null;
   return request({
     url: '/public/login',
     method: 'post',
     data: {
       number,
-      password
+      password,
+      tourist
     }
   })
 }

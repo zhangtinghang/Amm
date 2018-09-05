@@ -8,16 +8,18 @@
                 <el-input v-model="form.password"></el-input>
             </el-form-item>
             <el-form-item>
+                <el-button type="primary" :loading="loading" @click="onTourist">游客登录</el-button>
                 <el-button type="primary" :loading="loading" @click="onSubmit">立即创建</el-button>
-                <el-button>取消</el-button>
             </el-form-item>
         </el-form>
     </div>
 </template>
 
 <script>
+    import getBrowserInfo from '@/utils/getbower'
+    import crypto from 'crypto'
     export default {
-        data() {
+        data: function() {
             return {
                 form: {
                     username: '',
@@ -44,6 +46,26 @@
                         console.log('error submit!!')
                         return false
                     }
+                })
+            },
+            onTourist() {
+                this.loading = true;
+                var md5 = crypto.createHash("md5");
+                md5.update(JSON.stringify(getBrowserInfo()));
+                var name = md5.digest('hex');
+                let form = {
+                    username: name,
+                    password: 123456,
+                    isTourist: true
+                }
+                this.$store.dispatch('loginByUsername', form).then(() => {
+                    console.log('成功返回')
+                    this.loading = false
+                    this.$router.push({
+                        path: '/'
+                    })
+                }).catch(() => {
+                    this.loading = false
                 })
             }
         }

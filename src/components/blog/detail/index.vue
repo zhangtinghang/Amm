@@ -1,4 +1,5 @@
 <template>
+<transition name="el-fade-in-linear">
 	<div>
 		<section class="grid col-three-quarters mq2-col-two-thirds mq3-col-full">
 				<article class="post post-single">
@@ -7,13 +8,14 @@
 						<p>Posted on <span class="time">{{blogData.updateTime | timeString}}</span> by <a href="#" class="fn"><span v-if="blogData.user" v-text="blogData.user.username"></span><span v-else>未知</span></a> in <a href="#" class="cat">{{blogData.category | category}}</a>
             <!-- with <a href="#" class="comments-link">42 comments</a>. -->
             </p>
-					</div>
-					<div class="entry" >
-						<p v-html="blogData.blog">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi commodo, ipsum sed pharetra gravida, orci magna rhoncus neque, id pulvinar odio lorem non turpis. Nullam sit amet enim. Suspendisse id velit vitae ligula volutpat condimentum. Aliquam erat volutpat. Sed quis velit. Nulla facilisi. Nulla libero. Vivamus pharetra posuere sapien. Nam consectetuer. Sed aliquam, nunc eget euismod ullamcorper, lectus nunc ullamcorper orci, fermentum bibendum enim nibh eget ipsum. Donec porttitor ligula eu dolor. Maecenas vitae nulla consequat libero cursus venenatis. Nam magna enim, accumsan eu, blandit sed, blandit a, eros.</p>
-          </div>
+					</div>   
+          <div class="entry" >
+            <p v-html="blogData.blog">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi commodo, ipsum sed pharetra gravida, orci magna rhoncus neque, id pulvinar odio lorem non turpis. Nullam sit amet enim. Suspendisse id velit vitae ligula volutpat condimentum. Aliquam erat volutpat. Sed quis velit. Nulla facilisi. Nulla libero. Vivamus pharetra posuere sapien. Nam consectetuer. Sed aliquam, nunc eget euismod ullamcorper, lectus nunc ullamcorper orci, fermentum bibendum enim nibh eget ipsum. Donec porttitor ligula eu dolor. Maecenas vitae nulla consequat libero cursus venenatis. Nam magna enim, accumsan eu, blandit sed, blandit a, eros.</p>
+          </div>  
 				</article>
 		</section>
   </div>
+  </transition>
 </template>
 
 <script>

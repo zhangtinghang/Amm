@@ -21,6 +21,7 @@
               </div>
             </figcaption>
       </figure>
+      
     </div>
 </template>
 <script>

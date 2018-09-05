@@ -5,7 +5,8 @@
     <!-- 正文部分 -->
     <section class="grid col-three-quarters mq2-col-two-thirds mq3-col-full">
       <!-- 博文列表 -->
-      <article class="post" v-for="item in blogData" :key="item._id">
+      <transition name="el-fade-in-linear">
+      <article v-loading="loading" class="post" v-if="total != 0" v-for="item in blogData" :key="item._id">
 				<h2><router-link :to="{name:'BlogDetail',params:{obj:item}}">{{ item.title }}</router-link></h2>		
         <div class="meta">
 					<p>Posted on <span class="time">{{item.updateTime | timeString}}</span> by <a href="#" class="fn"><span v-if="item.user" v-text="item.user.username"></span><span v-else>未知</span></a> in <a href="#" class="cat">{{item.category | category}}</a>
@@ -19,7 +20,8 @@
           <router-link :to="{name:'BlogDetail',params:{obj:item}}" class="more-link">Continue reading…</router-link>
 				</footer>
 			</article>
-
+      </transition>
+      <!-- <noContent v-if="total == 0"></noContent> -->
 			<v-pagination class="list_page" :total="total" :current-page='current' @pagechange="pagechange"></v-pagination>
 		</section>
 </div>
@@ -29,6 +31,9 @@
 import { getList } from '@/api/blog'
 import store from '@/store'
 import pagination from '../compenont/pagination'
+import { seleSwitch } from '@/utils/index'
+import blogBus from '@/utils/eventBus'
+import noContent from '@/component/noContent'
 export default {
   data: function () {
     return {
@@ -40,28 +45,36 @@ export default {
       total: 5,     // 记录总条数
       display: 5,   // 每页显示条数
       current: 1,   // 当前的页数
+      loading: true,
     }
   },
   created() {
-    this.fetchData()
+    var that = this;
+    this.fetchData();
+    blogBus.$on('blogType',function(message){
+      that.fetchData(null, message)
+    })
   },
   components:{
-    'v-pagination': pagination
+    'v-pagination': pagination,
+    'noContent': noContent
   },
   methods:{
     //请求数据
-    fetchData(_id) {
+    fetchData(_id, categoryType) {
       let that = this;
       let limit = that.limit;
       let token = store.getters.token;
       let id = _id || null;
+      let category = categoryType;
       let preNum = that.preNum;
       let nextNum = that.nextNum;
       nextNum = parseInt(that.nextNum);
       preNum = parseInt(that.preNum);
-      getList(id, preNum, nextNum, limit, token).then(response => {
+      getList(id, preNum, nextNum, limit, token, category).then(response => {
         that.blogData = response.data;
         that.total = response.count;
+        that.loading = false;
         if(_id){
           that.preNum = nextNum;
         }
@@ -84,27 +97,7 @@ export default {
   },
   filters:{
     category:function(value){
-      switch (value) {
-        case 0:
-          value = 'android / 安卓'
-          break;
-        case 1:
-          value = 'web / 前端开发'
-          break;
-        case 2:
-          value = 'python /python开发'
-          break;
-        case 3:
-          value = 'games / 游戏'
-          break;
-        case 4:
-          value = 'UI / UI设计'
-          break;
-        default:
-          value = 'other / 其他'
-          break;
-      }
-       return value;
+       return seleSwitch(value);
     },
     timeString(time) {
       const date2 = new Date(time);

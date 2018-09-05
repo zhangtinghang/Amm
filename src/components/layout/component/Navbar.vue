@@ -36,7 +36,7 @@
             <ul>
                 <li>
                     <router-link to="/login">
-                        {{isLogin ? '欢迎您：'+username :'Login/登录'}}
+                        {{loginObj ? '欢迎您：'+usernameObj :'Login/登录'}}
                     </router-link>
                 </li>
             </ul>
@@ -51,11 +51,13 @@
     import store from '@/store'
     export default {
         name: 'Navbar',
-        data: function() {
-            return {
-                isLogin: getToken() ? true : false,
-                username: store.getters.name
-            }
+        computed:{
+            loginObj(){
+                return store.getters.token? true : false
+            },
+            usernameObj(){
+                return store.getters.name
+            } 
         }
     }
 </script>
