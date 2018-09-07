@@ -11,9 +11,10 @@
       </figure>
     </div> -->
 
-    <div class="slide">
+    <div>
+      <div class="slide">
       <figure>
-            <img src="../../../static/img/img.jpg" alt="">
+            <img src="@/assets/img.jpg" alt="">
             <figcaption>
               <div>
                 <h5>Caption 2</h5>
@@ -21,7 +22,7 @@
               </div>
             </figcaption>
       </figure>
-      
+    </div>
     </div>
 </template>
 <script>

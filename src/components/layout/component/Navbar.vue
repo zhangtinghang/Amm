@@ -35,8 +35,8 @@
             </ul>
             <ul>
                 <li>
-                    <router-link to="/login">
-                        {{loginObj ? '欢迎您：'+usernameObj :'Login/登录'}}
+                    <router-link :to="loginObj ? '/self' :'/login'">
+                        {{loginObj ? '欢迎您：'+ usernameObj :'Login/登录'}}
                     </router-link>
                 </li>
             </ul>
@@ -65,5 +65,8 @@
 <style scoped>
     .router-link-active {
         color: #0078CF;
+    }
+    #navtop{
+        padding-top: 5em;
     }
 </style>

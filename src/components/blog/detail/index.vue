@@ -1,6 +1,5 @@
 <template>
-<transition name="el-fade-in-linear">
-	<div>
+	<div class="self-enter-animate">
 		<section class="grid col-three-quarters mq2-col-two-thirds mq3-col-full">
 				<article class="post post-single">
 					<h2><a href="#" class="post-title" v-text="blogData.title"></a></h2>
@@ -15,7 +14,6 @@
 				</article>
 		</section>
   </div>
-  </transition>
 </template>
 
 <script>
@@ -78,7 +76,6 @@ export default {
 .entry{
   text-align: left;
 }
-
 </style>
 
 

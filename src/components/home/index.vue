@@ -10,8 +10,8 @@
 		<div class="grid col-one-half mq2-col-full">
 			<h1>移动创新俱乐部 <br>
 				Mobile innovation</h1>
-			<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi commodo, ipsum sed pharetra gravida, orci magna rhoncus neque, id pulvinar odio lorem non turpis. Nullam sit amet enim. Suspendisse id velit vitae ligula volutpat condimentum. Aliquam erat volutpat. Sed quis velit.
-			</p>
+			<p>移动创新俱乐部（原名：移动Mobile Market创新实验室）。实验室创立于2011年，由08级学生任伟、曾稼易、李剑、穆寒等在指导老师仲宝才的指导下申请创立。隶属团委、社团联合会管理指导。</p>
+			<p>实验室宗旨旨在提高实验室成员移动应用开发的综合能力。给移动应用程序开发感兴趣的同学搭建一个服务实践学习的交流平台。</p>
 		</div>
 
 		<!-- 首页轮播图模块，维护可直接添加或者删除。
@@ -20,9 +20,7 @@
 		   <div class="slider grid col-one-half mq2-col-full">
         <div class="flexslider">
           <div class="slides">
-            <keep-alive>
               <slide></slide>
-            </keep-alive>
           </div>
         </div>
 		   </div>
@@ -64,29 +62,31 @@
 		<article class="grid col-one-third mq3-col-full">
 			<aside>01</aside>
 			<h5>Android development / 安卓开发</h5>
-			<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi commodo, ipsum sed pharetra gravida, orci magna rhoncus neque, id pulvinar odio lorem non turpis. Nullam sit amet enim.</p>
+			<p>Android部门主要是开发手机app。通过学习java语言，理解面向对象思想，使用Android studio 开发工具将枯燥的代码变成手机上运行的应用，让你的代码活灵活现！</p>
 		</article>
-
+	
 		<article class="grid col-one-third mq3-col-full">
 			<aside>02</aside>
 			<h5>Web development / web开发</h5>
-			<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi commodo, ipsum sed pharetra gravida, orci magna rhoncus neque, id pulvinar odio lorem non turpis. Nullam sit amet enim.</p>
+			<p>前端对于网站来说，通常是指，网站的前台部分包括网站的表现层和结构层。因此前端技术一般分为前端设计和前端开发，前端设计一般可以理解为网站的视觉设计，前端开发则是网站的前台代码实现，包括基本的HTML和CSS以及JavaScript/ajax，现在最新的高级版本HTML5、CSS3，以及SVG等。</p>
 		</article>
 
 		<article class="grid col-one-third mq3-col-full">
 			<aside>03</aside>
 			<h5>Python development / python 开发</h5>
-			<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi commodo, ipsum sed pharetra gravida, orci magna rhoncus neque, id pulvinar odio lorem non turpis. Nullam sit amet enim.</p>
+			<p>Python开发的目前方向为服务器后端和分布式应用开发，注重培养多应用负载均衡以及性能优化，以学习Linux(CentOS)、Nginx、Flask、MySQL、MongoDB、Redis为主与其他部门进行协同开发。与此同时，对大数据、区块链、机器学习有极高兴趣的同学，也可以加入我们为部门开启一条新的道路。</p>
 		</article>
 		<article class="grid col-one-third mq3-col-full">
 			<aside>04</aside>
 			<h5>games development / 游戏开发</h5>
-			<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi commodo, ipsum sed pharetra gravida, orci magna rhoncus neque, id pulvinar odio lorem non turpis. Nullam sit amet enim.</p>
+			<p>游戏部主要通过学习c#语言，掌握基本的计算机语言知识。学习掌握u3d引擎，各个界面的基本操作和基本的API。完备知识储备，从设计，策划，程序开始做属于自己的游戏。</p>
 		</article>
 		<article class="grid col-one-third mq3-col-full">
 			<aside>05</aside>
 			<h5>UI design / UI设计</h5>
-			<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi commodo, ipsum sed pharetra gravida, orci magna rhoncus neque, id pulvinar odio lorem non turpis. Nullam sit amet enim.</p>
+			<p>美工部一个集设计与创意的部门，在这里你可以成为Ui设计师、交互设计师、平面设计师、动效设计师还可以成为游戏原画师、场景原画师
+。在这里你可以系统学习相关知识，与部门大神面对面交流，Photoshop精通什么的不在话下。
+</p>
 		</article>
 		<article class="grid col-one-third mq3-col-full">
 			<aside>06</aside>
@@ -94,7 +94,6 @@
 			<p>未完待续。。。期待你的加入，期待你的开拓！</p>
 		</article>
 	</section>
-
 <section class="works grid-wrap">
 	<header class="grid col-full">
 			<hr>
@@ -135,6 +134,9 @@ export default {
 
 .collapse-list:last-child{
 	border-bottom: none;
+}
+.col-one-third > p{
+	padding-bottom: 1em;
 }
 </style>
 

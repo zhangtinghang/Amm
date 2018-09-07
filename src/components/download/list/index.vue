@@ -2,11 +2,11 @@
   <div>
     <transition name="el-fade-in-linear">
       <article id="navteam" v-for="item in portList" :key="item._id">
-        <h2><a href="#">{{item.title}}</a></h2>
+        <h2><a href="javascript:;">{{item.title}}</a></h2>
         <p class="item-date"><span>下载日期：{{item.endTime | parseTime('{y}-{m}-{d}')}} ---- {{item.endTime | parseTime('{y}-{m}-{d}')}}</span><span>发布人：{{item.user.username}}</span>  <span>发布日期：{{item.updateTime | parseTime('{y}-{m}-{d} {h}:{i}')}}</span></p>
         <p>{{item.content}}</p>
         <p>下载地址：
-          <router-link :to="item.links.url">{{item.links.name}}</router-link>
+          <a :href="downURL+item.links.url">{{item.links.name}}</a>
         </p>
       </article>
     </transition>
@@ -28,6 +28,7 @@
     },
     data: function() {
       return {
+        downURL: process.env.STATIC_PORT,
         portList: '',
         count: 0,
         nextNum: 2,

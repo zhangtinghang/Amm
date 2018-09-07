@@ -2,12 +2,12 @@
   <!-- 博文列表 -->
   <div>
     <Aside />
-    <div class="figure-box">
+    <noContent v-if="total == 0"></noContent>
+    <div v-if="total != 0" class="figure-box">
       <transition name="el-fade-in-linear">
       <figure v-for="item in portList" :key="item._id" class="grid col-one-quarter mq2-col-one-half">
         <router-link :to="{name:'PortfolioDetail',params:{obj:item}}">
-              <img v-lazy="img_port+item.cover" alt="图片不见了，很尴尬，哈哈">
-          <span class="zoom"></span>
+              <img v-lazy="img_port+item.cover" alt="图片不见了，很尴尬，哈哈" class="item-cover">
         </router-link>
         <figcaption>
           <router-link class="arrow" v-text="item.title" :to="{name:'PortfolioDetail',params:{obj:item}}"></router-link>
@@ -17,7 +17,7 @@
       </figure>
       </transition>
     </div>
-    <v-pagination class="portfolio_page" :total="total" :current-page='current' @pagechange="pagechange"></v-pagination>
+    <v-pagination v-if="total != 0" class="portfolio_page" :total="total" :current-page='current' @pagechange="pagechange"></v-pagination>
   </div>
 </template>
 
@@ -29,15 +29,17 @@
   import Aside from '../component/menu'
   import pagination from '@/component/pagination'
   import portBus from '@/utils/eventBus'
+  import noContent from '@/component/noContent'
   export default {
     name: "portfoliolist",
     components: {
       Aside,
-      'v-pagination': pagination
+      'v-pagination': pagination,
+      'noContent': noContent
     },
     data: function() {
       return {
-        img_port: "http://localhost:3000",
+        img_port: process.env.STATIC_PORT,
         portList: '',
         count: 0,
         nextNum: 2,
@@ -105,11 +107,20 @@
 figure > a {
     display: block;
     height: 100%;
-    height: 150px;
+    height: 180px;
     overflow: hidden;
     position: relative;
     border-top: 1px solid #DDD;
     padding-top: 1em;
+}
+
+.item-cover {
+  position:absolute;
+	top:0;
+	bottom:0;
+	left:0;
+	right:0;
+	margin:auto;
 }
 
 

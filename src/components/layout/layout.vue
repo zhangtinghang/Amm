@@ -3,7 +3,6 @@
         <navbar></navbar>
         <app-main></app-main>
         <footbar></footbar>
-    
     </div>
     <!-- <router-view/> -->
 </template>
@@ -23,7 +22,8 @@
         },
     };
 </script>
-
-<style scoped>
-   
+<style>
+.container{
+    padding:0 !important;
+}
 </style>

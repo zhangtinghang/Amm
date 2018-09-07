@@ -4,8 +4,7 @@
     <div class="figure-box">
       <figure v-for="item in portList" :key="item._id" class="grid col-one-quarter mq2-col-one-half">
         <router-link :to="{name:'PortfolioDetail',params:{obj:item}}">
-          <img class="" v-lazy="img_port+item.cover" alt="图片不见了，很尴尬，哈哈">
-          <span class="zoom"></span>
+          <img class="item-cover" v-lazy="img_port+item.cover" alt="图片不见了，很尴尬，哈哈">
         </router-link>
         <figcaption>
           <router-link class="arrow" v-text="item.title" :to="{name:'PortfolioDetail',params:{obj:item}}"></router-link>
@@ -26,7 +25,7 @@
     name: "portfoliolist",
     data: function() {
       return {
-        img_port: "http://localhost:3000",
+        img_port: process.env.STATIC_PORT,
         portList: '',
         count: 0,
         nextNum: 2,
@@ -82,7 +81,16 @@
     visibility: hidden;
   }
   .works figure > a{
-    height: 150px;
+    height: 180px;
   }
+
+  .item-cover {
+  position:absolute;
+	top:0;
+	bottom:0;
+	left:0;
+	right:0;
+	margin:auto;
+}
 </style>
 

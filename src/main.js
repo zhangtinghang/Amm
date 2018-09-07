@@ -16,10 +16,11 @@ Vue.use(ElementUI, {
   size: 'medium' // set element-ui default size
 })
 
-import errImg from '@/assets/loading.jpg'
+import loadImg from '@/assets/logding.svg'
+import failImg from '@/assets/fail.png'
 Vue.use(VueLazyload, {
-  error: errImg,
-  loading: errImg
+  error: failImg,
+  loading: loadImg
 })
 // Vue.prototype.$http = axios
 Vue.config.productionTip = false

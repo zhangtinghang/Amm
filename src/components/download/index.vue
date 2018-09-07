@@ -11,13 +11,13 @@
 			<!-- 暂时感觉无需分类，暂定如此 -->
 			<menu>
 				<ul>
-					<li><a href="#" class="arrow" @click="toggleBtn(null)">All / 全部</a></li>
-					<li><a href="#" class="arrow" @click="toggleBtn(0)">Android / 安卓</a></li>
-					<li><a href="#" class="arrow" @click="toggleBtn(1)">Web / 前端</a></li>
-					<li><a href="#" class="arrow" @click="toggleBtn(2)">UI / 美工</a></li>
-					<li><a href="#" class="arrow" @click="toggleBtn(3)">Game / 游戏</a></li>
-					<li><a href="#" class="arrow" @click="toggleBtn(4)">Python / Python</a></li>
-					<li><a href="#" class="arrow" @click="toggleBtn(5)">Other / 其他</a></li>
+					<li><a href="javascript:;" class="arrow" @click="toggleBtn(null)">All / 全部</a></li>
+					<li><a href="javascript:;" class="arrow" @click="toggleBtn(0)">Android / 安卓</a></li>
+					<li><a href="javascript:;" class="arrow" @click="toggleBtn(1)">Web / 前端</a></li>
+					<li><a href="javascript:;" class="arrow" @click="toggleBtn(2)">UI / 美工</a></li>
+					<li><a href="javascript:;" class="arrow" @click="toggleBtn(3)">Game / 游戏</a></li>
+					<li><a href="javascript:;" class="arrow" @click="toggleBtn(4)">Python / Python</a></li>
+					<li><a href="javascript:;" class="arrow" @click="toggleBtn(5)">Other / 其他</a></li>
 				</ul>
 			</menu>
 		</aside>

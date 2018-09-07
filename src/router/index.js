@@ -111,6 +111,19 @@ export default new Router({
           component: () => import('@/components/login/index')
         }
       ]
+    },
+    {
+      path: '/self',
+      component: Layout,
+      name:'self',
+      redirect: '/self',
+      children: [
+        {
+          path: '/self',
+          name: 'Self',
+          component: () => import('@/components/self/index')
+        }
+      ]
     }
   ]
 })

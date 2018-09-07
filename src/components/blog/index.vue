@@ -1,6 +1,6 @@
 <template>
   <div class="blog-page main grid-wrap">
-    <div class="blogLeft">
+    <div class="blogLeft grid col-three-quarters mq2-col-two-thirds mq3-col-full">
       <header class="grid col-full">
         <hr>
         <router-link :to="{ name: 'Bloglist'}">
@@ -31,7 +31,9 @@ export default {
 </script>
 
 <style scoped>
-
+.blogLeft{
+  overflow:auto;
+}
 </style>
 
 

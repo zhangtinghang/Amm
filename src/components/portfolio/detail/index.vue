@@ -1,6 +1,5 @@
 <template>
-<transition name="el-fade-in-linear">
-  <div>
+  <div class="self-enter-animate">
     <aside class="grid col-one-quarter mq2-col-one-third mq3-col-full">
       <h6>文章标题</h6>
       <p class="mbottom" v-text="articleData.title">
@@ -45,7 +44,6 @@
         <figure class="" v-html="articleData.content"></figure>
     </section>
   </div>
-  </transition>
   <!--main-->
 </template>
 
@@ -62,7 +60,6 @@
     },
     mounted: function() {
       this.articleData = this.$route.params.obj;
-      console.log('传递参数过来', this.$route.params.obj)
       this.technology = this.articleData.technology.split(",");
   
       var links_name = this.articleData.links.name.split(",");
@@ -72,7 +69,6 @@
       var testimonial_name = this.articleData.testimonial.name.split(",");
       var testimonial_url = this.articleData.testimonial.url.split(",");
       this.testimonial = ArrToObj(testimonial_name, testimonial_url);
-      console.log(this.links)
       // this.links = links.split(",");
       //如果没有数据 返回列表页 防止用户在当前页面刷新时，无数据报错
       if (!this.articleData) {

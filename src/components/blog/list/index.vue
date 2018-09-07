@@ -1,29 +1,28 @@
 <template>
 
-<div>
-    
+<div class="list-item">
     <!-- 正文部分 -->
-    <section class="grid col-three-quarters mq2-col-two-thirds mq3-col-full">
-      <!-- 博文列表 -->
-      <transition name="el-fade-in-linear">
-      <article v-loading="loading" class="post" v-if="total != 0" v-for="item in blogData" :key="item._id">
-				<h2><router-link :to="{name:'BlogDetail',params:{obj:item}}">{{ item.title }}</router-link></h2>		
-        <div class="meta">
-					<p>Posted on <span class="time">{{item.updateTime | timeString}}</span> by <a href="#" class="fn"><span v-if="item.user" v-text="item.user.username"></span><span v-else>未知</span></a> in <a href="#" class="cat">{{item.category | category}}</a>
-          <!-- with <a href="#" class="comments-link">42 comments</a>. -->
-          </p>
-				</div>
-        <div class="entry">
-					<p v-text="item.intro">文章内容</p>
-				</div>
-				<footer>
-          <router-link :to="{name:'BlogDetail',params:{obj:item}}" class="more-link">Continue reading…</router-link>
-				</footer>
-			</article>
+    <section v-loading="loading">
+      <noContent v-if="total == 0"></noContent>
+      <transition appear name="el-zoom-in-top">
+        <article v-if="total != 0" class="post" v-for="item in blogData" :key="item._id">
+          <h2><router-link :to="{name:'BlogDetail',params:{obj:item}}">{{ item.title }}</router-link></h2>		
+          <div class="meta">
+            <p>Posted on <span class="time">{{item.updateTime | timeString}}</span> by <a href="#" class="fn"><span v-if="item.user" v-text="item.user.username"></span><span v-else>未知</span></a> in <a href="#" class="cat">{{item.category | category}}</a>
+            <!-- with <a href="#" class="comments-link">42 comments</a>. -->
+            </p>
+          </div>
+          <div class="entry">
+            <p v-text="item.intro">文章内容</p>
+          </div>
+          <footer>
+            <router-link :to="{name:'BlogDetail',params:{obj:item}}" class="more-link">Continue reading…</router-link>
+          </footer>
+        </article>
       </transition>
-      <!-- <noContent v-if="total == 0"></noContent> -->
-			<v-pagination class="list_page" :total="total" :current-page='current' @pagechange="pagechange"></v-pagination>
+      <v-pagination v-if="total != 0" class="list_page" :total="total" :current-page='current' @pagechange="pagechange"></v-pagination>
 		</section>
+    
 </div>
 
 </template>
@@ -105,12 +104,19 @@ export default {
       return date2.toLocaleString();
       console.log(date2.toLocaleString())
     }
+  },
+  beforeLeave: function(el){
+    console.log('将要离开动画',el)
   }
 }
 </script>
 <style scoped>
 .pagination{
   width: 100% !important;
+}
+
+.list-item{
+  padding-left:3em;
 }
 </style>
 <style>

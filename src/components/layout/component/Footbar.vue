@@ -3,25 +3,23 @@
         <div class="divide-top">
             <footer class="grid-wrap">
                 <ul class="grid col-one-third social">
-                    <li><a href="#">RSS</a></li>
-                    <li><a href="#">Facebook</a></li>
-                    <li><a href="#">Twitter</a></li>
-                    <li><a href="http://www.cssmoban.com/">免费网站模板</a></li>
-                    <li><a href="http://www.cssmoban.com/" title="模板之家">模板之家</a></li>
+                    
+                    <li><a target="_blank" href="http://nsu.edu.cn">Chengdu Neusoft University</a></li>
+                    <li><a target="_blank" href="javascript:;">Github</a></li>
+                    <li><a target="_blank" href="javascript:;">Wechat</a></li>
+                    <li><a href="javascript:;">&copy 2017-{{nowTime}} 移动MM All Rights Reserved</a></li>
                 </ul>
-    
                 <div class="up grid col-one-third ">
                     <a href="#navtop" title="Go back up">&uarr;</a>
                 </div>
     
                 <nav class="grid col-one-third ">
                     <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="works.html">Works</a></li>
-                        <li><a href="services.html">Services</a></li>
-                        <li><a href="blog.html">Blog</a></li>
-                        <li><a href="contact.html">Contact</a></li>
+                        <li><router-link to="/home" exact>Home</router-link></li>
+                        <li><router-link to="/blog">Blog</router-link></li>
+                        <li><router-link to="/portfolio">Portolio</router-link></li>
+                        <li><router-link to="/download">Download</router-link></li>
+                        <div><a target="_blank" href="http://www.miibeian.gov.cn">蜀ICP备18017868号</a></div>
                     </ul>
                 </nav>
             </footer>
@@ -29,7 +27,12 @@
 </template>
 <script>
 export default {
-    name:'Footbar'
+    name:'Footbar',
+    data(){
+        return {
+            nowTime:new Date().getFullYear()
+        }
+    }
 }
 </script>
 <style scoped>
