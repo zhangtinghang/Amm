@@ -3,20 +3,20 @@
   <div>
     <Aside />
     <noContent v-if="total == 0"></noContent>
+    <transition name="el-fade-in-linear">
     <div v-if="total != 0" class="figure-box">
-      <transition name="el-fade-in-linear">
-      <figure v-for="item in portList" :key="item._id" class="grid col-one-quarter mq2-col-one-half">
-        <router-link :to="{name:'PortfolioDetail',params:{obj:item}}">
-              <img v-lazy="img_port+item.cover" alt="图片不见了，很尴尬，哈哈" class="item-cover">
-        </router-link>
-        <figcaption>
-          <router-link class="arrow" v-text="item.title" :to="{name:'PortfolioDetail',params:{obj:item}}"></router-link>
-          <!-- <a href="javascript:;" class="arrow"  v-text="item.title"></a> -->
-          <p v-text="item.intro"></p>
-        </figcaption>
-      </figure>
-      </transition>
+        <figure v-for="item in portList" :key="item._id" class="grid col-one-quarter mq2-col-one-half">
+          <router-link :to="{name:'PortfolioDetail',params:{obj:item}}">
+                <img v-lazy="img_port+item.cover" alt="图片不见了，很尴尬，哈哈" class="item-cover">
+          </router-link>
+          <figcaption>
+            <router-link class="arrow" v-text="item.title" :to="{name:'PortfolioDetail',params:{obj:item}}"></router-link>
+            <!-- <a href="javascript:;" class="arrow"  v-text="item.title"></a> -->
+            <p v-text="item.intro"></p>
+          </figcaption>
+        </figure>
     </div>
+  </transition>
     <v-pagination v-if="total != 0" class="portfolio_page" :total="total" :current-page='current' @pagechange="pagechange"></v-pagination>
   </div>
 </template>

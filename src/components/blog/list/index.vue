@@ -2,9 +2,10 @@
 
 <div class="list-item">
     <!-- 正文部分 -->
+    <transition appear name="el-zoom-in-top">
     <section v-loading="loading">
       <noContent v-if="total == 0"></noContent>
-      <transition appear name="el-zoom-in-top">
+      
         <article v-if="total != 0" class="post" v-for="item in blogData" :key="item._id">
           <h2><router-link :to="{name:'BlogDetail',params:{obj:item}}">{{ item.title }}</router-link></h2>		
           <div class="meta">
@@ -19,9 +20,9 @@
             <router-link :to="{name:'BlogDetail',params:{obj:item}}" class="more-link">Continue reading…</router-link>
           </footer>
         </article>
-      </transition>
       <v-pagination v-if="total != 0" class="list_page" :total="total" :current-page='current' @pagechange="pagechange"></v-pagination>
 		</section>
+    </transition>
     
 </div>
 
