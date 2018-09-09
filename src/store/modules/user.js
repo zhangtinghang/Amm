@@ -5,7 +5,6 @@ const user = {
   state: {
     user: '',
     status: '',
-    code: '',
     token: getToken(),
     name: '',
     avatar: '',
@@ -13,13 +12,12 @@ const user = {
     roles: [],
     setting: {
       articlePlatform: []
-    }
+    },
+    type:'',
+    createTime:''
   },
 
   mutations: {
-    SET_CODE: (state, code) => {
-      state.code = code
-    },
     SET_TOKEN: (state, token) => {
       state.token = token
     },
@@ -43,6 +41,12 @@ const user = {
     },
     SET_ROLES: (state, roles) => {
       state.roles = roles
+    },
+    SET_TYPE: (state, type) => {
+      state.type = type
+    },
+    SET_CREATETIME: (state,createTime) => {
+      state.createTime = createTime;
     }
   },
 
@@ -71,6 +75,7 @@ const user = {
             reject('error')
           }
           const data = response.data
+          console.log('data',data)
           if (data.roles && data.roles.length > 0) { // 验证返回的roles是否是一个非空数组
             commit('SET_ROLES', data.roles)
           } else {
@@ -79,6 +84,9 @@ const user = {
           commit('SET_NAME', data.username)
           commit('SET_AVATAR', data.avatar)
           commit('SET_USER', data._id)
+          commit('SET_STATUS',data.status)
+          commit('SET_TYPE', data.type)
+          commit('SET_CREATETIME', data.createTime)
           resolve(response)
         }).catch(error => {
           reject(error)
@@ -88,7 +96,6 @@ const user = {
 
     // 登出
     LogOut({ commit, state }) {
-      console.log('这是执行了登出操作？')
       return new Promise((resolve, reject) => {
         logout(state.token).then(() => {
           commit('SET_TOKEN', '')
@@ -104,7 +111,12 @@ const user = {
     // 前端 登出
     FedLogOut({ commit }) {
       return new Promise(resolve => {
-        commit('SET_TOKEN', '')
+        commit('SET_NAME', '')
+        commit('SET_AVATAR', '')
+        commit('SET_USER', '')
+        commit('SET_STATUS','')
+        commit('SET_TYPE', '')
+        commit('SET_CREATETIME', '')
         removeToken()
         resolve()
       })

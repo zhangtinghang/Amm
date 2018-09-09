@@ -84,3 +84,18 @@ export function parseTime(time, cFormat) {
     return value;
   }
   
+export  function payload (roles){
+    let tem = null;
+    if(roles.indexOf('admin') >= 0){
+        tem = '超级管理员';
+    }else if(roles.indexOf('edit') >= 0){
+        tem = '管理员';
+    }else if(roles.indexOf('normal') >= 0){
+        tem = '普通用户';
+    }else if(roles.indexOf('tourist') >= 0){
+        tem = '游客';
+    }else {
+        tem = '无权限';
+    }
+    return tem;
+}
