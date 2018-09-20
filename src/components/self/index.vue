@@ -7,7 +7,7 @@
                         <span>个人资料</span>
                     </div>
                     <div>
-                        <el-form :model="form" ref="form">
+                        <el-form :model="form" status-icon :rules="rules"  ref="form">
                             <el-row class="el-row-header" :gutter="12">
                                 <el-col :xs="24" :sm="8" :md="8" :lg="8" :xl="8">
                                     <el-form-item>
@@ -20,16 +20,16 @@
                                 </el-col>
 
                                 <el-col :xs="24" :sm="16" :md="16" :lg="16" :xl="16">
-                                    <el-col :xs="24" :sm="24" :md="8" :lg="8" :xl="8">
+                                    <el-col v-show="isTourist" :xs="24" :sm="24" :md="8" :lg="8" :xl="8">
                                         <el-form-item >
                                             <el-button type="primary" @click="modifyData">{{dataEdit?'确认修改':'修改资料'}}</el-button>
-                                            <el-button v-show="dataEdit" @click="dataEdit=false">取消</el-button>
+                                            <el-button v-show="dataEdit" @click="exitpwdEdit(0)">取消</el-button>
                                         </el-form-item>
                                     </el-col>
-                                    <el-col :xs="24" :sm="24" :md="8" :lg="8" :xl="8">
+                                    <el-col v-show="isTourist" :xs="24" :sm="24" :md="8" :lg="8" :xl="8">
                                          <el-form-item :xs="24" :sm="24" :md="8" :lg="8" :xl="8">
                                             <el-button type="primary" @click="modifyPwd">{{pwdEdit?'确认修改':'修改密码'}}</el-button>
-                                            <el-button v-show="pwdEdit" @click="pwdEdit=false">取消</el-button>
+                                            <el-button v-show="pwdEdit" @click="exitpwdEdit(1)">取消</el-button>
                                         </el-form-item>
                                     </el-col>
                                     <el-col :xs="24" :sm="24" :md="8" :lg="8" :xl="8">
@@ -64,8 +64,8 @@
                                         {{form.type | typeConversion}}
                                         <!-- <el-input v-model="form.type"></el-input> -->
                                         <el-select v-show="dataEdit" v-model="form.type" placeholder="请选择所属部门:">
-                                            <el-option label="Andrid / 安卓开发" value="Andrid / 安卓开发"></el-option>
-                                            <el-option label="Web / Web前端" value="Web / Web前端"></el-option>
+                                            <el-option label="Android / 安卓开发" value="Android / 安卓开发"></el-option>
+                                            <el-option label="Web / Web前端开发" value="Web / Web前端开发"></el-option>
                                             <el-option label="Python / Python开发" value="Python / Python开发"></el-option>
                                             <el-option label="Games / 游戏开发" value="Games / 游戏开发"></el-option>
                                             <el-option label="UI / UI设计" value="UI / UI设计"></el-option>
@@ -76,18 +76,18 @@
                             </el-row>
                             <el-row :gutter="12">
                                 <el-col :xs="24" :sm="8" :md="8" :lg="8" :xl="8">
-                                    <el-form-item v-show="pwdEdit" label="旧密码">
-                                        <el-input v-model="form.oldPwd"  placeholder="请输入旧密码"></el-input>
+                                    <el-form-item v-show="pwdEdit" label="旧密码" prop="oldPwd">
+                                        <el-input type="password"  v-model="form.oldPwd"  placeholder="请输入旧密码"></el-input>
                                     </el-form-item>
                                 </el-col>
                                  <el-col :xs="24" :sm="8" :md="8" :lg="8" :xl="8">
-                                    <el-form-item v-show="pwdEdit" label="新密码">
-                                        <el-input v-model="form.newPwd"  placeholder="请输入新密码"></el-input>
+                                    <el-form-item v-show="pwdEdit" label="新密码" prop="newPwd">
+                                        <el-input type="password" v-model="form.newPwd"  placeholder="请输入新密码"></el-input>
                                     </el-form-item>
                                 </el-col>
                                  <el-col :xs="24" :sm="8" :md="8" :lg="8" :xl="8">
-                                    <el-form-item v-show="pwdEdit" label="确认密码">
-                                        <el-input v-model="form.confirmPwd"  placeholder="请确认新密码"></el-input>
+                                    <el-form-item v-show="pwdEdit" label="确认密码" prop="confirmPwd">
+                                        <el-input type="password" v-model="form.confirmPwd"  placeholder="请确认新密码"></el-input>
                                     </el-form-item>
                                 </el-col>
                             </el-row>
@@ -101,12 +101,32 @@
 <script>
 import PanThumb from '@/components/PanThumb'
 import store from '@/store'
-import { parseTime, seleSwitch, payload } from '@/utils'
+import { parseTime, seleSwitch, payload, typeToCode } from '@/utils'
+import { updateAccount, modifyPwd } from '@/api/account'
 export default {
     components: {
     PanThumb
   },
   data(){
+      var validatePass = (rule, value, callback) => {
+        if (value === '') {
+          callback(new Error('请输入新密码'));
+        } else {
+          if (this.form.newPwd !== '') {
+            this.$refs.form.validateField('confirmPwd');
+          }
+          callback();
+        }
+      };
+      var validatePass2 = (rule, value, callback) => {
+        if (value === '') {
+          callback(new Error('请再次输入密码'));
+        } else if (value !== this.form.confirmPwd) {
+          callback(new Error('两次输入密码不一致!'));
+        } else {
+          callback();
+        }
+      };
       return {
           form:{
               roles:payload(store.getters.roles),
@@ -118,7 +138,16 @@ export default {
               confirmPwd:''
           },
           dataEdit: false,
-          pwdEdit: false
+          pwdEdit: false,
+          rules: {
+            newPwd: [
+                { validator: validatePass, trigger: 'blur' }
+            ],
+            confirmPwd: [
+                { validator: validatePass2, trigger: 'blur' }
+            ]
+            },
+            isTourist: store.getters.roles.indexOf('tourist')==-1 ? true : false
       }
   },
   computed:{
@@ -128,10 +157,86 @@ export default {
   },
   methods:{
       modifyData:function(){
-          this.dataEdit = !this.dataEdit
+          let that = this;
+          if(that.dataEdit){
+              that.updateData(function(boolen){
+                  if(boolen){
+                      that.dataEdit = !that.dataEdit
+                  }
+              });
+          }else{
+              that.dataEdit = !that.dataEdit
+          } 
       },
-      modifyPwd:function(){
-          this.pwdEdit = !this.pwdEdit;
+      modifyPwd:function(){     
+          let that = this;  
+          if(that.pwdEdit){
+              if(that.form.newPwd != that.form.confirmPwd){
+                    that.$message({
+                    message: '两次密码输入不一致',
+                    type: 'success'
+                });
+                return false;
+            }
+              that.updatePwd(function(boolen){
+                  if(boolen){
+                      that.pwdEdit = !that.pwdEdit;
+                      //重置
+                      that.$refs['form'].resetFields();
+                  }
+              });      
+          }else{
+              that.pwdEdit = !that.pwdEdit
+          }
+      },
+      updateData:function(callback){
+        //获取新数据，并上传
+        let obj = {};
+        obj.type = typeToCode(this.form.type);
+        let token = store.getters.token;
+        let id = store.getters.user;
+        updateAccount( id, token, obj ).then(response => {
+            if(response.success){
+                this.$message({
+                    message: '修改成功',
+                    type: 'success'
+                });
+                return callback && callback(true);
+            }
+        })
+        return callback && callback(false);
+      },
+      updatePwd:function(callback){
+        let obj = {};
+        obj.oldPwd = this.form.oldPwd;
+        obj.newPwd = this.form.newPwd;
+        obj.confirmPwd = this.form.confirmPwd;
+        let token = store.getters.token;
+        let id = store.getters.user;
+        modifyPwd( id, token, obj ).then(response => {
+            if(response.success){
+                this.$message({
+                    message: '修改成功',
+                    type: 'success'
+                });
+                return callback && callback(true);
+            }
+        })
+        return callback && callback(false);
+      },
+      exitpwdEdit:function(val){
+          switch (val) {
+              case 0:
+                    this.form.type = seleSwitch(store.getters.type);
+                    this.dataEdit = false;
+                  break;
+              case 1:
+                    this.pwdEdit = false;
+                    this.$refs['form'].resetFields();
+                  break;
+              default:
+                  break;
+          }
       },
       Logout:function(){
           let that = this;

@@ -5,7 +5,7 @@
                 <el-input v-model="form.username"></el-input>
             </el-form-item>
             <el-form-item label="密码">
-                <el-input v-model="form.password"></el-input>
+                <el-input type="password" v-model="form.password"></el-input>
             </el-form-item>
             <el-form-item>
                 <el-button type="primary" :loading="loading" @click="onTourist">游客登录</el-button>
@@ -43,7 +43,6 @@
                             this.loading = false
                         })
                     } else {
-                        console.log('error submit!!')
                         return false
                     }
                 })
@@ -59,7 +58,6 @@
                     isTourist: true
                 }
                 this.$store.dispatch('loginByUsername', form).then(() => {
-                    console.log('成功返回')
                     this.loading = false
                     this.$router.push({
                         path: '/'

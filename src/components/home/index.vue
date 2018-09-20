@@ -98,7 +98,7 @@
 	<header class="grid col-full">
 			<hr>
 			<p class="fleft">Portfolio / 作品集</p>
-			<a href="works.html" class="arrow fright">see more infos / 查看更多作品</a>
+			<router-link to="/portfolio" class="arrow fright">see more infos / 查看更多作品</router-link>
 		</header>
 
 			<!-- <figure class="grid col-one-quarter mq2-col-one-half">

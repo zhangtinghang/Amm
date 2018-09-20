@@ -60,16 +60,16 @@ export function parseTime(time, cFormat) {
   export function seleSwitch(value) {
     switch (value) {
       case 0:
-      value = 'android / 安卓'
+      value = 'Android / 安卓开发'
       break;
     case 1:
-      value = 'web / 前端开发'
+      value = 'Web / Web前端开发'
       break;
     case 2:
-      value = 'python /python开发'
+      value = 'python / python开发'
       break;
     case 3:
-      value = 'games / 游戏'
+      value = 'Games / 游戏开发'
       break;
     case 4:
       value = 'UI / UI设计'
@@ -79,6 +79,33 @@ export function parseTime(time, cFormat) {
       break;
     default:
       value = 'Unknown / 未知'
+      break;
+    }
+    return value;
+  }
+
+  export function typeToCode(value) {
+    switch (value) {
+      case 'Android / 安卓开发':
+      value = 0;
+      break;
+    case 'Web / Web前端开发':
+      value = 1
+      break;
+    case 'Python / Python开发':
+      value = 2
+      break;
+    case 'Games / 游戏开发':
+      value = 3
+      break;
+    case 'UI / UI设计':
+      value = 4
+      break;
+    case 'Other / 其他':
+      value = 5
+      break;
+    default:
+      value = 6
       break;
     }
     return value;

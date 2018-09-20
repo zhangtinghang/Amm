@@ -9,7 +9,7 @@
           <a :href="downURL+item.links.url">{{item.links.name}}</a>
         </p>
       </article>
-    <v-pagination class="download_page" :total="total" :current-page='current' @pagechange="pagechange"></v-pagination>
+    <v-pagination v-if="portList.length>0" class="download_page" :total="total" :current-page='current' @pagechange="pagechange"></v-pagination>
   </div>
   </transition>
 </template>

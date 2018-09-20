@@ -1,7 +1,6 @@
 <template>
     <div class="self-enter-animate">
         <img src="@/assets/blank.png">
-        <p class="text">暂无内容</p>
     </div>
 </template>
 <script>
