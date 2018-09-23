@@ -1,28 +1,34 @@
 <template>
-    <div>
+    <el-card class="login-card">
         <el-form ref="form" :model="form" label-width="80px">
             <el-form-item label="账号">
-                <el-input v-model="form.username"></el-input>
+                <el-input v-model="form.number"></el-input>
             </el-form-item>
             <el-form-item label="密码">
                 <el-input type="password" v-model="form.password"></el-input>
             </el-form-item>
+
+            <!-- <el-form-item label="记住账号"> <el-switch></el-switch></el-form-item> -->
+
             <el-form-item>
                 <el-button type="primary" :loading="loading" @click="onTourist">游客登录</el-button>
-                <el-button type="primary" :loading="loading" @click="onSubmit">立即创建</el-button>
+                <el-button type="primary" :loading="loading" @click="onSubmit">登陆</el-button>
             </el-form-item>
+            
+            
         </el-form>
-    </div>
+    </el-card>
 </template>
 
 <script>
     import getBrowserInfo from '@/utils/getbower'
-    import crypto from 'crypto'
+    import Fingerprint from '@/utils/fingerprint'
+    import md5 from '@/utils/md5.min'
     export default {
         data: function() {
             return {
                 form: {
-                    username: '',
+                    number: '',
                     password: ''
                 },
                 loading: false
@@ -34,6 +40,14 @@
                 this.$refs.form.validate(valid => {
                     if (valid) {
                         this.loading = true
+                        if(this.form.number =='' || this.form.password== ''){
+                            this.loading = false
+                            return this.$message({
+                                message: '账号或密码不能为空！',
+                                type: 'warning'
+                            });
+                        }
+                        this.form.password = md5(this.form.password)
                         this.$store.dispatch('loginByUsername', this.form).then(() => {
                             this.loading = false
                             this.$router.push({
@@ -49,15 +63,13 @@
             },
             onTourist() {
                 this.loading = true;
-                var md5 = crypto.createHash("md5");
-                md5.update(JSON.stringify(getBrowserInfo()));
-                var name = md5.digest('hex');
+                //生成uuid
+                var fingerprint = new Fingerprint({canvas: true}).get();
                 let form = {
-                    username: name,
-                    password: 123456,
-                    isTourist: true
+                    number: fingerprint,
+                    intro:getBrowserInfo()
                 }
-                this.$store.dispatch('loginByUsername', form).then(() => {
+                this.$store.dispatch('loginByTourist', form).then(() => {
                     this.loading = false
                     this.$router.push({
                         path: '/'
@@ -74,5 +86,9 @@
     html,
     body {
         height: 100% !important;
+    }
+    .login-card{
+        /* width: 50%; */
+        margin: 10% auto;
     }
 </style>

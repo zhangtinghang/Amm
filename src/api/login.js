@@ -1,6 +1,6 @@
 import request from '@/utils/request'
 
-export function loginByUsername(number, password, isTourist) {
+export function loginByUsername(number, password, isTourist, userInfo) {
   let tourist = isTourist || null;
   return request({
     url: '/public/login',
@@ -8,7 +8,19 @@ export function loginByUsername(number, password, isTourist) {
     data: {
       number,
       password,
-      tourist
+      tourist,
+      userInfo
+    }
+  })
+}
+
+export function loginByTourist( number, intro ) {
+  return request({
+    url: '/public/touristLogin',
+    method: 'post',
+    data: {
+      number,
+      intro
     }
   })
 }

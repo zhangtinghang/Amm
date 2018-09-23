@@ -3,7 +3,7 @@
   <div>
       <article id="navteam" v-for="item in portList" :key="item._id">
         <h2><a href="javascript:;">{{item.title}}</a></h2>
-        <p class="item-date"><span>下载日期：{{item.endTime | parseTime('{y}-{m}-{d}')}} - - {{item.endTime | parseTime('{y}-{m}-{d}')}}</span><span>发布人：{{item.user.username}}</span>  <span>发布日期：{{item.updateTime | parseTime('{y}-{m}-{d} {h}:{i}')}}</span></p>
+        <p class="item-date"><span>下载日期：{{item.endTime | parseTime('{y}-{m}-{d}')}} - - {{item.endTime | parseTime('{y}-{m}-{d}')}}</span><span>发布人：{{item.user && item.user.username || '未知'}}</span>  <span>发布日期：{{item.updateTime | parseTime('{y}-{m}-{d} {h}:{i}')}}</span></p>
         <p>{{item.content}}</p>
         <p>下载地址：
           <a :href="downURL+item.links.url">{{item.links.name}}</a>
@@ -61,6 +61,7 @@
         nextNum = parseInt(that.nextNum);
         preNum = parseInt(that.preNum);
         getList(id, preNum, nextNum, limit, token, category).then(response => {
+          console.log(response)
           that.portList = response.data;
           that.total = response.count;
           if (_id) {

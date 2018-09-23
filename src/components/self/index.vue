@@ -103,6 +103,7 @@ import PanThumb from '@/components/PanThumb'
 import store from '@/store'
 import { parseTime, seleSwitch, payload, typeToCode } from '@/utils'
 import { updateAccount, modifyPwd } from '@/api/account'
+import md5 from '@/utils/md5.min'
 export default {
     components: {
     PanThumb
@@ -191,11 +192,9 @@ export default {
       },
       updateData:function(callback){
         //获取新数据，并上传
-        let obj = {};
-        obj.type = typeToCode(this.form.type);
         let token = store.getters.token;
         let id = store.getters.user;
-        updateAccount( id, token, obj ).then(response => {
+        updateAccount( id, token, typeToCode(this.form.type)).then(response => {
             if(response.success){
                 this.$message({
                     message: '修改成功',
@@ -208,12 +207,12 @@ export default {
       },
       updatePwd:function(callback){
         let obj = {};
-        obj.oldPwd = this.form.oldPwd;
-        obj.newPwd = this.form.newPwd;
-        obj.confirmPwd = this.form.confirmPwd;
+        let oldPwd = md5(this.form.oldPwd);
+        let newPwd = md5(this.form.newPwd);
+        let confirmPwd = md5(this.form.confirmPwd);
         let token = store.getters.token;
         let id = store.getters.user;
-        modifyPwd( id, token, obj ).then(response => {
+        modifyPwd( id, token, oldPwd, newPwd, confirmPwd ).then(response => {
             if(response.success){
                 this.$message({
                     message: '修改成功',
